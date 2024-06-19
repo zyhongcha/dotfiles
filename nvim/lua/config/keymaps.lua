@@ -2,7 +2,6 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 keymap.set("n", "x", '"_x')
-keymap.set("n", "y", "+y")
 -- Increment/decrement
 keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")
@@ -42,10 +41,10 @@ keymap.set("n", "sj", "<C-w>j")
 keymap.set("n", "sl", "<C-w>l")
 
 -- Resize window
-keymap.set("n", "<C-S-h>", "<C-w><")
-keymap.set("n", "<C-S-l>", "<C-w>>")
-keymap.set("n", "<C-S-k>", "<C-w>+")
-keymap.set("n", "<C-S-j>", "<C-w>-")
+keymap.set("n", "<C-w-h>", "<C-w><")
+keymap.set("n", "<C-w-l>", "<C-w>>")
+keymap.set("n", "<C-w-k>", "<C-w>+")
+keymap.set("n", "<C-w-j>", "<C-w>-")
 
 -- Formatting
 
