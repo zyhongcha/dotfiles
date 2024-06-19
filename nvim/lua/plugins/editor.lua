@@ -23,6 +23,7 @@ return {
 					builtin.find_files({
 						no_ignore = true,
 						hidden = true,
+						respect_gitignore = false,
 					})
 				end,
 				desc = "Lists files in your current working directory, respects .gitignore",
@@ -119,9 +120,11 @@ return {
 							"file",
 							"--type",
 							"symlink",
+							"--no-ignore-vcs",
+							"--no-require-git",
 							"--hidden",
 							"--ignore-file",
-							vim.fn.expand("~/.config/nvim/.rgignore"),
+							vim.fn.expand("~/.config/nvim/.fdignore"),
 						},
 					},
 				},

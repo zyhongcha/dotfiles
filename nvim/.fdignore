@@ -1,7 +1,7 @@
 yarn.lock
 node_modules/
 dist/
-*.next
+.next/
 *.git/
 *.woff
 *.woff2

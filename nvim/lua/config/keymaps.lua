@@ -6,6 +6,9 @@ keymap.set("n", "x", '"_x')
 keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")
 
+keymap.set("v", "D-c", '"+y<CR>')
+keymap.set("n", "D-v", '"+p<CR>')
+
 -- Move line Up / Down
 keymap.set("n", "<A-j>", ":move .+1<CR>==")
 keymap.set("n", "<A-k>", ":move .-2<CR>==")
@@ -15,14 +18,12 @@ keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv")
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G")
 
--- Save file and quit
-keymap.set("n", "<Leader>w", ":update<Return>", opts)
-keymap.set("n", "<Leader>q", ":quit<Return>", opts)
-keymap.set("n", "<Leader>Q", ":qa<Return>", opts)
+-- Save file
+keymap.set("n", "<D-s>", ":update<Return>", opts)
 
 -- File explorer with NvimTree
-keymap.set("n", "<Leader>f", ":NvimTreeFindFile<Return>", opts)
-keymap.set("n", "<Leader>t", ":NvimTreeToggle<Return>", opts)
+keymap.set("n", "<Leader>e", ":NvimTreeFindFile<Return>", opts)
+keymap.set("n", "<Leader>E", ":NvimTreeToggle<Return>", opts)
 
 -- Tabs
 keymap.set("n", "te", ":tabedit")
