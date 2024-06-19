@@ -1,0 +1,4 @@
+layout fat
+enabled_layouts fat
+cd ~/Documents/work
+launch tmux new -A -s default

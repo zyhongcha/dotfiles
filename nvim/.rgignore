@@ -1,0 +1,15 @@
+yarn.lock
+node_modules/
+dist/
+*.next
+*.git/
+*.woff
+*.woff2
+*.otf
+*.svg
+*.jpg
+*.jpeg
+*.webp
+build/
+target/
+package-lock.json
