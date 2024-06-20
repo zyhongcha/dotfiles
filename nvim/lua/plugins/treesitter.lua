@@ -10,6 +10,7 @@ return {
 				"css",
 				"gitignore",
 				"graphql",
+				"astro",
 				"php",
 				"http",
 				"json",
