@@ -22,8 +22,8 @@ keymap.set("n", "<C-a>", "gg<S-v>G")
 keymap.set("n", "<D-s>", ":update<Return>", opts)
 
 -- File explorer with NvimTree
-keymap.set("n", "<Leader>e", ":NvimTreeFindFile<Return>", opts)
-keymap.set("n", "<Leader>E", ":NvimTreeToggle<Return>", opts)
+keymap.set("n", "<Leader>e", ":NvimTreeFindFile<Return>", { noremap = false })
+keymap.set("n", "<Leader>E", ":NvimTreeToggle<Return>", { noremap = false })
 
 -- Tabs
 keymap.set("n", "te", ":tabedit")
