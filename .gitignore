@@ -2,7 +2,10 @@
 !.gitignore
 !kitty/
 !kitty/**
-!nvim/
-!nvim/**
+!lvim/
+!lvim/**
 !tmux/
 !tmux/**
+!lvim-startup.sh
+!neovide/
+!neovide/**

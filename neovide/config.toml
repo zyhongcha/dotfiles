@@ -1,0 +1,6 @@
+frame = "transparent"
+title-hidden = true
+fork = true
+idle = true
+background_opacity = 0.85
+transparent = true
