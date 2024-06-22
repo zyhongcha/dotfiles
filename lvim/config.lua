@@ -9,6 +9,52 @@
 lvim.builtin.treesitter.ensure_installed = {"php"}
 
 ------------------------
+-- Copilot
+------------------------
+lvim.plugins = {
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({})
+        end
+    },
+    {
+        "zbirenbaum/copilot-cmp",
+        config = function()
+            require("copilot_cmp").setup({
+                suggestion = {
+                    enabled = true
+                },
+                panel = {
+                    enabled = false
+                }
+            })
+        end
+    },
+    {
+        ------------------------
+        -- HTML Autoclose Tags
+        ------------------------
+        "windwp/nvim-ts-autotag",
+        event = "InsertEnter",
+        config = function()
+            require('nvim-ts-autotag').setup({
+                -- whether to enable plugin
+                enable = true
+            })
+        end
+    },
+    'rmagatti/auto-session',
+    config = function()
+        require("auto-session").setup {
+            log_level = "error",
+        }
+    end
+}
+
+------------------------
 -- Keymaps
 ------------------------
 
@@ -48,7 +94,7 @@ lvim.keys.normal_mode["<C-s-tab>"] = ":bprev<CR>"
 -- Reset buffer
 lvim.keys.normal_mode["<D-q>"] = ":e!<CR>"
 -- Close buffer
-lvim.keys.normal_mode["<D-w>"] = ":bd<CR>"
+lvim.keys.normal_mode["<D-w>"] = ":BufferKill<CR>"
 
 -- Save like in MacOS
 lvim.keys.normal_mode["<D-s>"] = ":update<Return>"
@@ -56,6 +102,9 @@ lvim.keys.normal_mode["<D-s>"] = ":update<Return>"
 lvim.keys.normal_mode["<D-z>"] = ":undo<CR>"
 -- Redo like in MacOS
 lvim.keys.normal_mode["<D-S-z>"] = ":redo<CR>"
+
+-- Formatting
+lvim.keys.normal_mode["<A-S-f>"] = "<Cmd>lua require('lvim.lsp.utils').format()<CR>"
 
 vim.opt.title = true
 vim.opt.backup = false
@@ -80,11 +129,5 @@ vim.g.remember_window_size = true
 vim.g.remember_window_position = true
 vim.g.neovide_cursor_vfx_mode = "pixiedust"
 
--- Helper function for transparency formatting
-local alpha = function()
-    return string.format("%x", math.floor(255 * vim.g.transparency or 0.8))
-end
--- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
-vim.g.neovide_transparency = 0.0
-vim.g.transparency = 0.92
-vim.g.neovide_background_color = "#0f1117" .. alpha()
+vim.g.neovide_transparency = 0.9
+vim.g.transparency = 0.9
