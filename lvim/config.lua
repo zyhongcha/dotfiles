@@ -38,7 +38,6 @@ lvim.builtin.which_key.mappings["E"] = {":NvimTreeToggle<CR>", "NVIMTREE TOGGLE"
     noremap = false
 }}
 
-
 -- Split window
 lvim.keys.normal_mode["<S-Enter>"] = ":split<CR>"
 lvim.keys.normal_mode["<S-C-Enter>"] = ":vsplit<CR>"
@@ -71,8 +70,21 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.showcmd = true
 vim.opt.backup = false
-vim.opt.path:append({ "**" })
-vim.opt.wildignore:append({ "*/node_modules/*" })
+vim.opt.path:append({"**"})
+vim.opt.wildignore:append({"*/node_modules/*"})
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.relativenumber = true
+
+vim.g.remember_window_size = true
+vim.g.remember_window_position = true
+vim.g.neovide_cursor_vfx_mode = "pixiedust"
+
+-- Helper function for transparency formatting
+local alpha = function()
+    return string.format("%x", math.floor(255 * vim.g.transparency or 0.8))
+end
+-- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
+vim.g.neovide_transparency = 0.0
+vim.g.transparency = 0.92
+vim.g.neovide_background_color = "#0f1117" .. alpha()
