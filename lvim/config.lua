@@ -46,11 +46,64 @@ lvim.plugins = {
             })
         end
     },
-    'rmagatti/auto-session',
-    config = function()
-        require("auto-session").setup {
-            log_level = "error",
-        }
+    {
+        'rmagatti/auto-session',
+        config = function()
+            require("auto-session").setup({
+                log_level = "error"
+            })
+        end
+    },
+    {
+        "stevearc/conform.nvim",
+        event = {"BufReadPre", "BufNewFile"},
+        config = function()
+            local conform = require("conform")
+
+            conform.setup({
+                formatters_by_ft = {
+                    javascript = {{"prettierd", "prettier"}},
+                    typescript = {{"prettierd", "prettier"}},
+                    javascriptreact = {{"prettierd", "prettier"}},
+                    typescriptreact = {{"prettierd", "prettier"}},
+                    svelte = {{"prettierd", "prettier"}},
+                    css = {{"prettierd", "prettier"}},
+                    html = {{"prettierd", "prettier"}},
+                    json = {{"prettierd", "prettier"}},
+                    yaml = {{"prettierd", "prettier"}},
+                    markdown = {{"prettierd", "prettier"}},
+                    graphql = {{"prettierd", "prettier"}},
+                    lua = {"stylua"},
+                    python = {"isort", "black"}
+                },
+                format_on_save = {
+                    lsp_fallback = true,
+                    async = false,
+                    timeout_ms = 1000
+                }
+            })
+        end
+    },
+    ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
+        -- config variable is the default configuration table for the setup functino call
+        local null_ls = require "null-ls"
+        -- Check supported formatters and linters
+        -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
+        -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
+        config.sources = { -- Set a formatter
+        null_ls.builtins.formatting.stylua, null_ls.builtins.formatting.prettier}
+        -- set up null-ls's on_attach function
+        -- NOTE: You can remove this on attach function to disable format on save
+        config.on_attach = function(client)
+            if client.resolved_capabilities.document_formatting then
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                    desc = "Auto format before save",
+                    pattern = "<buffer>",
+                    callback = vim.lsp.buf.formatting_sync
+                })
+            end
+        end
+        return config -- return final config table to use in require("null-ls").setup(config)
     end
 }
 
@@ -102,6 +155,18 @@ lvim.keys.normal_mode["<D-s>"] = ":update<Return>"
 lvim.keys.normal_mode["<D-z>"] = ":undo<CR>"
 -- Redo like in MacOS
 lvim.keys.normal_mode["<D-S-z>"] = ":redo<CR>"
+-- Copy / Paste like in MacOS
+lvim.keys.visual_mode["<D-c>"] = '"+y'
+lvim.keys.visual_mode["<D-x>"] = '"+x'
+lvim.keys.visual_mode["<D-v>"] = '"+p'
+lvim.keys.insert_mode["<D-c>"] = '"+y'
+lvim.keys.insert_mode["<D-x>"] = '"+x'
+lvim.keys.insert_mode["<D-v>"] = '"+p'
+lvim.keys.normal_mode["<D-c>"] = '"+y'
+lvim.keys.normal_mode["<D-x>"] = '"+x'
+lvim.keys.normal_mode["<D-v>"] = '"+p'
+
+
 
 -- Formatting
 lvim.keys.normal_mode["<A-S-f>"] = "<Cmd>lua require('lvim.lsp.utils').format()<CR>"
